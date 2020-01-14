@@ -1,7 +1,7 @@
 /*	Author: vshuk003
  *  Partner(s) Name: Nicole Nguyen
- *	Lab Section:
- *	Assignment: Lab #  Exercise #
+ *	Lab Section: 23
+ *	Assignment: Lab 3  Exercise 1
  *	Exercise Description: [optional - include for your own benefit]
  *
  *	I acknowledge all content contained herein, excluding template or example
@@ -15,20 +15,30 @@
 int main(void) {
     /* Insert DDR and PORT initializations */
 	DDRA = 0x00; PORTA = 0xFF;
-	DDRB = 0xFF; PORTB = 0x00;
+	DDRB = 0x00; PORTB = 0xFF;
+	DDRC = 0xFF; PORTC = 0x00;
+	unsigned char tmpA = 0x00;
 	unsigned char tmpB = 0x00;
-	unsigned char button = 0x00;
+	unsigned char count = 0x00;
+
     /* Insert your solution below */
     while (1) {
-	button = PINA & 0x01;
+	// Read input
+	tmpA = PINA & 0xFF;
+	tmpB = PINB & 0xFF;
+	count = 0x00;
 	
-	if(button == 0x01) {
-		tmpB = (tmpB & 0xFC) | 0x01;
-	} else {
-		tmpB = (tmpB & 0xFC) | 0x02;
+	while (tmpA) {
+		count += tmpA & 0x01;
+		tmpA >>= 1;
+	}
+
+	while (tmpB) {
+		count += tmpB & 0x01;
+		tmpB >>= 1;
 	}
 	
-	PORTB = tmpB;	
+	PORTC = count;	
     }
-    return 1;
+return 0;
 }
