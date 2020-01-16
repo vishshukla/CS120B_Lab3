@@ -27,55 +27,45 @@ echo ======================================================\n
 echo Running all tests..."\n\n
 
 # Example test:
-test "PIND: 0x00, PINB: 0x00 => PORTB: 0x00"
+test "PINA: 0x00 => PORTB: 0x00 PORTC: 0x00"
 # Set inputs
-setPIND 0x00
-setPINB 0x00
+setPINA 0x00
 # Continue for several ticks
 continue 2
 # Set expect values
 expectPORTB 0x00
+expectPORTC 0x00
 # Check pass/fail
 checkResult
 
-test "PIND: 0x01, PINB: 0x01 => PORTB: 0x01"
-setPIND 0x01
-setPINB 0x01
+test "PINA: 0x01 => PORTB: 0x00 PORTC: 0x10"
+setPINA 0x01
 continue 2
-expectPORTB 0x01 
+expectPORTB 0x00
+expectPORTC 0x10 
 checkResult
 
-# weight == 5, nothing should happen
-test "PIND: 0x02, PINB: 0x01 => PORTB: 0x01"
-setPIND 0x02
-setPINB 0x01
+test "PINA: 0x60 => PORTB: 0x06 PORTC: 0x00"
+setPINA 0x60
 continue 2
-expectPORTB 0x01 
+expectPORTB 0x06
+expectPORTC 0x00 
 checkResult
 
-# weight == 6, PB2 = 1
-test "PIND: 0x03, PINB: 0x00 => PORTB: 0x04"
-setPIND 0x03
-setPINB 0x00
+test "PINA: 0xCC => PORTB: 0x0C PORTC: 0xC0"
+setPINA 0xCC
 continue 2
-expectPORTB 0x04
+expectPORTB 0x0C
+expectPORTC 0xC0
 checkResult
 
-# weight = FF, PB1 = 1
-test "PIND: 0xFF, PINB: 0x00 => PORTB: 0x02"
-setPIND 0xFF
-setPINB 0x00
+test "PINA: 0xF9 => PORTB: 0x0F PORTC: 0x90"
+setPINA 0xF9
 continue 2
-expectPORTB 0x02 
+expectPORTB 0x0F
+expectPORTC 0x90 
 checkResult
 
-# weight = FF, PB1 = 1
-test "PIND: 0xFF, PINB: 0x01 => PORTB: 0x03"
-setPIND 0xFF
-setPINB 0x01
-continue 2
-expectPORTB 0x03 
-checkResult
 
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
