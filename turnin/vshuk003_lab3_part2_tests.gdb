@@ -87,36 +87,6 @@ expectPORTC 0x3F
 checkResult
 
 
-test "PINA: 0x0A => PORTC: 0x3E"
-setPINA 0x0A
-continue 2
-expectPORTC 0x3E
-checkResult
-
-test "PINA: 0x3A => PORTC: 0xBE"
-setPINA 0x3A
-continue 2
-expectPORTC 0xBE
-checkResult
-
-
-
-test "PINA: 0x30 => PORTC: 0x80"
-setPINA 0x30
-continue 2
-expectPORTC 0x80
-checkResult
-
-
-test "PINA: 0x70 => PORTC: 0x00"
-setPINA 0x70
-continue 2
-expectPORTC 0x00
-checkResult
-
-
-
-
 # Report on how many tests passed/tests ran
 set $passed=$tests-$failed
 eval "shell echo Passed %d/%d tests.\n",$passed,$tests
